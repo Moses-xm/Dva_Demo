@@ -56,8 +56,6 @@ dva 是体验技术部开发的 React 应用框架，将上面三个 React 工�
 
 dva = React-Router + Redux + Redux-saga
 
-他最核心的是提供了 `app.model` 方法，**用于把 reducer , initialState , action , saga 封装到一起**。
-
 ## Dva 概念
 
 ### 数据流向
@@ -126,7 +124,7 @@ action 必须带有 `type` 属性指明具体的行为，其它字段可以自�
 
 dispatching function 是一个用于触发 action 的函数，action 是改变 State 的唯一途径，但是它只描述了一个行为，而 dipatch 可以看作是触发这个行为的方式，而 Reducer 则是描述如何改变数据的。
 
-在 dva 中，connect Model 的组件通过 props 可以访问到 dispatch，可以调用 Model 中的 Reducer 或者 Effects，常见的形式如：
+在 dva 中，connect Model 的组件通过 props 可以访问到 dispatch，通过dispatch就可以调用 Model 中的 Reducer 或者 Effects，常见的形式如：
 
 ```js
 dispatch({
@@ -233,9 +231,9 @@ reducers: {
 
 Effect 被称为副作用，在我们的应用中，最常见的就是异步操作。它来自于函数编程的概念，之所以叫副作用是因为它使得我们的函数变得不纯，同样的输入不一定获得同样的输出。
 
-dva 为了控制副作用的操作，底层引入了[redux-sagas](http://superraytin.github.io/redux-saga-in-chinese)做异步流程控制，由于采用了[generator的相关概念](http://www.ruanyifeng.com/blog/2015/04/generator.html)，所以将异步转成同步写法，从而将effects转为纯函数。
+dva 为了控制副作用的操作，底层引入了[redux-saga](http://superraytin.github.io/redux-saga-in-chinese)做异步流程控制，基于 generator语法。Generator 返回的是迭代器，通过 yield 关键字实现暂停功能。所以将异步转成同步写法，从而将effects转为纯函数。
 
-effects：用于处理异步操作和业务逻辑，不直接修改 state。简单的来说，就是获取从服务端获取数据，并且发起一个 action 交给 reducer 的地方。这是基于 redux-saga 实现的，语法为 generator。Generator 返回的是迭代器，通过 yield 关键字实现暂停功能。
+effects：用于处理异步操作和业务逻辑，不直接修改 state。简单的来说，就是从服务端获取数据，并且发起一个 action 交给 reducer 。
 
 ```js
 effects: {
