@@ -22,10 +22,7 @@ export default {
   },
 
   effects: {
-    *fetch({ payload }, { call, put, select }) {
-      // console.log("payload", payload);
-      // const todo = yield select((state) => state.todo);
-      // console.log("todo", todo);
+    *fetch({ payload }, { call, put }) {
       const res = yield call(query);
       if (res) {
         const newData = res.data.result.map((item) => ({
