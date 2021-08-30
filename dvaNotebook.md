@@ -1,4 +1,4 @@
-# Dva学习
+# Dva
 ## Dva 介绍
 dva 首先是一个基于 [redux](https://github.com/reduxjs/redux) 和 [redux-saga](https://github.com/redux-saga/redux-saga) 的数据流方案，然后为了简化开发体验，dva 还额外内置了 [react-router](https://github.com/ReactTraining/react-router) 和 [fetch](https://github.com/github/fetch)，所以也可以理解为一个轻量级的应用框架。
 
@@ -200,7 +200,7 @@ namespace: 'user'
 
 ####  State
 
-State 表示 Model 的状态数据，通常表现为一个 javascript 对象（当然它可以是任何值）；操作的时候每次都要当作不可变数据（immutable data）来对待，保证每次都是全新对象，没有引用关系，这样才能保证 State 的独立性，便于测试和追踪变化。
+State 表示 Model 的状态数据，通常表现为一个 javascript 对象（当然它可以是任何值）
 
 与具体route相关的所有状态数据结构存放在该属性中。
 
@@ -235,15 +235,6 @@ dva 为了控制副作用的操作，底层引入了[redux-saga](http://superray
 
 effects：用于处理异步操作和业务逻辑，不直接修改 state。简单的来说，就是从服务端获取数据，并且发起一个 action 交给 reducer 。
 
-```js
-effects: {
-    *fetch(action, { put, call }) {
-      const users = yield call(fetchUsers, action.data);
-      yield put({ type: 'save', data: users });
-    },
-}
-```
-
 dva 提供多个 effect 函数内部的处理函数，比较常用的是 `call` 和 `put`。
 
 - put：发出一个 Action，类似于 dispatch
@@ -262,6 +253,15 @@ const result = yield call(fetch, '/todos');
 
 ```js
 const todos = yield select(state => state.todos);
+```
+
+```js
+effects: {
+    *fetch(action, { put, call }) {
+      const users = yield call(fetchUsers, action.data);
+      yield put({ type: 'save', data: users });
+    },
+}
 ```
 
 #### Subscriptions
@@ -335,5 +335,3 @@ export default RouterConfig;
 ├── .roadhogrc.mock.js // 项目的配置文件
 └── package.json       // 当前整一个项目的依赖
 ```
-
-
