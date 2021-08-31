@@ -188,7 +188,7 @@ export default {
 }
 ```
 
-Model 是 dva 最重要的部分，可以理解为 redux、redux-saga 的封装。 每个独立的route都对应一个model, 每个model包含如下属性:
+Model 是 dva 最重要的部分，可以理解为 redux、redux-saga 的封装。 每个路由组件都对应一个model, 每个model包含如下属性:
 
 #### namespace
 
@@ -231,7 +231,7 @@ reducers: {
 
 Effect 被称为副作用，在我们的应用中，最常见的就是异步操作。它来自于函数编程的概念，之所以叫副作用是因为它使得我们的函数变得不纯，同样的输入不一定获得同样的输出。
 
-dva 为了控制副作用的操作，底层引入了[redux-saga](http://superraytin.github.io/redux-saga-in-chinese)做异步流程控制，基于 generator语法。Generator 返回的是迭代器，通过 yield 关键字实现暂停功能。所以将异步转成同步写法，从而将effects转为纯函数。
+dva 为了控制副作用的操作，底层引入了[redux-saga](http://superraytin.github.io/redux-saga-in-chinese)做异步流程控制，基于 generator语法。Generator 返回的是迭代器，通过 yield 关键字实现暂停功能。所以将异步转成同步写法。
 
 effects：用于处理异步操作和业务逻辑，不直接修改 state。简单的来说，就是从服务端获取数据，并且发起一个 action 交给 reducer 。
 
@@ -335,3 +335,5 @@ export default RouterConfig;
 ├── .roadhogrc.mock.js // 项目的配置文件
 └── package.json       // 当前整一个项目的依赖
 ```
+
+
